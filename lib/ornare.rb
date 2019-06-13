@@ -12,6 +12,10 @@ module Ornare
         {
           email_id: 'websiteform',
           name: 'Site - Vendas - SP'
+        },
+        {
+          email_id: 'websiteform',
+          name: 'Site - Vendas - RJ'
         }
       ]
     end 
