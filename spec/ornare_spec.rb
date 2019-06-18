@@ -6,7 +6,7 @@ RSpec.describe F1SalesCustom::Email::Parser do
 
     context 'when is contains "vendas" and a state' do
 
-      let(:state){ 'SP' }
+      let(:state){ 'AL' }
       let(:deparment){ 'vendas' }
       let(:email) do
         email = OpenStruct.new
@@ -37,7 +37,7 @@ RSpec.describe F1SalesCustom::Email::Parser do
       end
 
       it 'contains product' do
-        expect(parsed_email[:product]).to eq('Vendas')
+        expect(parsed_email[:product]).to eq(deparment.capitalize + ' - ' + state)
       end
 
       it 'contains a message' do

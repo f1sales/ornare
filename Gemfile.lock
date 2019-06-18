@@ -15,7 +15,7 @@ GIT
 PATH
   remote: .
   specs:
-    ornare (0.1.4)
+    ornare (0.1.5)
       f1sales_custom-email
       f1sales_helpers
 
