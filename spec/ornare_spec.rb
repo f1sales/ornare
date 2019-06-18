@@ -19,29 +19,10 @@ RSpec.describe F1SalesCustom::Email::Parser do
 
       let(:parsed_email) { described_class.new(email).parse }
 
-      context 'when is from SP' do
-        it 'contains website form as source name' do
-          expect(parsed_email[:source][:name]).to eq(F1SalesCustom::Email::Source.all.first[:name])
-        end
+      it 'contains website form as source name' do
+        expect(parsed_email[:source][:name]).to eq(F1SalesCustom::Email::Source.all.first[:name])
       end
 
-      context 'when is from RJ' do
-        let(:state){ 'RJ' }
-        let(:parsed_email) { described_class.new(email).parse }
-
-        it 'contains website form as source name' do
-          expect(parsed_email[:source][:name]).to eq(F1SalesCustom::Email::Source.all[1][:name])
-        end
-      end
-
-      context 'when is from MG' do
-        let(:state){ 'MG' }
-        let(:parsed_email) { described_class.new(email).parse }
-
-        it 'contains website form as source name' do
-          expect(parsed_email[:source][:name]).to eq(F1SalesCustom::Email::Source.all[2][:name])
-        end
-      end
 
       it 'contains name' do
         expect(parsed_email[:customer][:name]).to eq('Carolina Martins')
