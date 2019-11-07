@@ -44,7 +44,7 @@ module Ornare
       message = @email.body.split('Estado').last.split("\n").drop(1).join("\n")
       department = @email.subject.split(':').first
 
-      source = case state
+      source = case state.strip
       when 'RJ'
        F1SalesCustom::Email::Source.all[1]
       when 'BH'
