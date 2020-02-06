@@ -10,27 +10,27 @@ module Ornare
     def self.all
       [
         {
-          email_id: 'websiteform',
+          email_id: 'website_form_sender',
           name: 'Site - Vendas - Outros Estados'
         },
         {
-          email_id: 'websiteform',
+          email_id: 'website_form_sender',
           name: 'Site - Vendas - RJ'
         },
         {
-          email_id: 'websiteform',
+          email_id: 'website_form_sender',
           name: 'Site - Vendas - BH'
         },
         {
-          email_id: 'websiteform',
+          email_id: 'website_form_sender',
           name: 'Site - Vendas - MT'
         },
         {
-          email_id: 'websiteform',
+          email_id: 'website_form_sender',
           name: 'Site - Vendas - SP - GMS'
         },
         {
-          email_id: 'websiteform',
+          email_id: 'website_form_sender',
           name: 'Site - Vendas - SP - D&D'
         },
       ]
@@ -43,6 +43,7 @@ module Ornare
       state = parsed_email['estado']
       message = parsed_email['corpo_da_mensagem']
       department = @email.subject.split(':').first
+      name, email = parsed_email['de'].split(/</)
 
       source = case state
       when 'RJ'
@@ -64,9 +65,9 @@ module Ornare
           name: source_name, 
         },
         customer: {
-          name: parsed_email['de'],
+          name: name.strip,
           phone: parsed_email['telefone'].tr('^0-9', ''),
-          email: parsed_email['email']
+          email: (email || "").gsub('>', '')
         },
         product: department.capitalize + ' - ' + state,
         message: message,
