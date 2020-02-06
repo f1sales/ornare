@@ -102,7 +102,7 @@ RSpec.describe F1SalesCustom::Email::Parser do
       let(:email) do
         email = OpenStruct.new
         email.to = [email: 'website_form_sender@lojateste.f1sales.org']
-        email.subject = "#{deparment}: Mensagem de Carolina Martins"
+        email.subject = 'Ornare "Vendas / Orçamento"'
         email.body = "De: Carolina Martins <carolmmgo@hotmail.com> Telefone: 11 98376 0878 Estado: #{state} Corpo da mensagem: Olá Equipe Ornare,  Estou tentando um contato na loja mais próxima da minha casa, mas parece que os telefones abaixo não funcionam:  São Paulo – Gabriel Monteiro da Silva Al. Gabriel Monteiro da Silva, 1101 – Jd. Paulistano 2ª a 6ª das 10h às 20h e sáb. das 10h às 14h Tel.: +55 (11) 3065.6622 Assistência Técnica: +55 (11) 3090.3250  Antes de enviar o orçamento, eu gostaria de conversar com alguém da loja localizada no Jd. Paulistano.  Obrigada, Carolina Martins"
 
         email
@@ -127,7 +127,7 @@ RSpec.describe F1SalesCustom::Email::Parser do
       end
 
       it 'contains product' do
-        expect(parsed_email[:product]).to eq(deparment.capitalize + ' - ' + state)
+        expect(parsed_email[:product]).to eq('Vendas - ' + state)
       end
 
       it 'contains a message' do

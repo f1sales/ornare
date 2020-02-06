@@ -42,7 +42,8 @@ module Ornare
       parsed_email = @email.body.colons_to_hash(/(Telefone|Assunto|Estado|Endereço|Newsletter|De|Email|Corpo da mensagem).*?:/, false)
       state = parsed_email['estado']
       message = parsed_email['corpo_da_mensagem']
-      department = @email.subject.split(':').first
+      department = @email.subject.downcase.include?('vendas') ? 'Vendas' : 'Outros'
+
       name, email = parsed_email['de'].split(/</)
 
       source = case state
