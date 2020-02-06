@@ -39,12 +39,12 @@ module Ornare
 
   class F1SalesCustom::Email::Parser
     def parse
-      parsed_email = @email.body.colons_to_hash
-      state = parsed_email['estado'].split("\n").first
-      message = @email.body.split('Estado').last.split("\n").drop(1).join("\n")
+      parsed_email = @email.body.colons_to_hash(/(Telefone|Assunto|Estado|Endereço|Newsletter|De|Email|Corpo da mensagem).*?:/, false)
+      state = parsed_email['estado']
+      message = parsed_email['corpo_da_mensagem']
       department = @email.subject.split(':').first
 
-      source = case state.strip
+      source = case state
       when 'RJ'
        F1SalesCustom::Email::Source.all[1]
       when 'BH'
@@ -70,6 +70,7 @@ module Ornare
         },
         product: department.capitalize + ' - ' + state,
         message: message,
+        description: "Endereço cliente: #{parsed_email['endereo']}"
       }
     end
 
